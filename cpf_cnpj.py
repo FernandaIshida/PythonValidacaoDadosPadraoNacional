@@ -5,7 +5,7 @@ class CpfCnpj:
         self.tipo_documento = tipo_documento
         documento = str(documento)
         if self.tipo_documento == "cpf":
-            if self.cpf_eh_valido(documento):
+            if self.cpf_e_valido(documento):
                 self.cpf = documento
             else:
                 raise ValueError("CPF invalido!!")
@@ -27,9 +27,14 @@ class CpfCnpj:
     def format_cpf(self):
         mascara = CPF()
         return mascara.mask(self.cpf)
-
+    def format_cnpj(self):
+        mascara = CNPJ()
+        return mascara.mask(self.cnpj)
     def __str__(self):
-        return self.format_cpf()
+        if self.tipo_documento == "cpf":
+            return self.format_cpf()
+        elif self.tipo_documento == "cnpj":
+            return self.format_cnpj()
 
     def cnpj_e_valido(self, cnpj):
         if len(cnpj) == 14:
